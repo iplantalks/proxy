@@ -79,3 +79,11 @@ export CLOUDFLARE_API_TOKEN=xxxxxxxxxx
 Token can be created [here](https://dash.cloudflare.com/profile/api-tokens), use "Edit Cloudflare Workers" template, it has all required permissions
 
 Both environment variables are added as secrets to github, for automated deployments
+
+In case if you already have tokens for other accounts just save them to another wariable and do soemthing like this:
+
+```bash
+export CLOUDFLARE_ACCOUNT_ID=$ITALKS_CLOUDFLARE_ACCOUNT_ID
+export CLOUDFLARE_API_TOKEN=$ITALKS_CLOUDFLARE_API_TOKEN
+npm run deploy
+```
