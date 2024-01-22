@@ -18,7 +18,33 @@ Also it will handle cors for you
 
 Here is an simple usage example
 
-TODO
+```html
+<script src="https://proxy.iplan-talks.workers.dev"></script>
+<script type="module">
+  const data = await proxy(
+    'https://http://query2.finance.yahoo.com/v10/finance/quotesummary/v8/finance/chart/META?period1=1672524000&period2=1705953041&interval=1d'
+  )
+</script>
+```
+
+or pass your implementation, aka:
+
+```js
+/**
+ * Proxy request to another host
+ * @param {string | URL} url
+ * @param {number | null} cache time to live in seconds
+ * @returns
+ */
+async function proxy(url, ttl = null) {
+  url = new URL(url)
+  var host = url.hostname
+  url.hostname = 'proxy.iplan-talks.workers.dev'
+  return await fetch(url, { headers: { 'X-Host': host, 'X-Cache': ttl ? 'public, max-age=' + ttl : undefined } })
+}
+```
+
+Proxy does expect `X-Host` header with actual hostname, and optional `X-Cache` header that will be added to response
 
 ## How it works
 
