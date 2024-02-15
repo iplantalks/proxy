@@ -23,7 +23,9 @@ export default {
     if (
       req.method === 'OPTIONS' &&
       req.headers.get('origin') &&
-      (req.headers.get('origin').endsWith('italks.com.ua') || req.headers.get('origin').includes('localhost'))
+      (req.headers.get('origin').endsWith('italks.com.ua') ||
+        req.headers.get('origin').endsWith('mac-blog.org.ua') ||
+        req.headers.get('origin').includes('localhost'))
     ) {
       return new Response(null, {
         headers: {
