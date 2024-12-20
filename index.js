@@ -45,14 +45,14 @@ export default {
 
     url.host = host
     if (cache) {
-      req.cf = {
-        cacheTtl: parseInt(cache.match(/\d+/)),
-        cacheEverything: true,
-      }
+      // req.cf = {
+      //   cacheTtl: parseInt(cache.match(/\d+/)),
+      //   cacheEverything: true,
+      // }
     }
     var res = await fetch(url, req)
     res = new Response(res.body, res)
-    res.headers.set('Access-Control-Allow-Origin', req.headers.get('origin'))
+    res.headers.set('Access-Control-Allow-Origin', req.headers.get('origin') || req.headers.get('host'))
     res.headers.set('Access-Control-Allow-Methods', '*')
     res.headers.set('Access-Control-Allow-Headers', '*')
 
