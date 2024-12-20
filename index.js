@@ -36,6 +36,7 @@ export default {
       })
     }
 
+    var cache = req.headers.get('x-cache-control')
     var url = new URL(req.url)
     var host = req.headers.get('x-host')
     if (req.method === 'GET' && (url.pathname === '/' || !host)) {
@@ -43,13 +44,19 @@ export default {
     }
 
     url.host = host
+    if (cache) {
+      req.cf = {
+        cacheTtl: parseInt(cache.match(/\d+/)),
+        cacheEverything: true,
+      }
+    }
     var res = await fetch(url, req)
     res = new Response(res.body, res)
     res.headers.set('Access-Control-Allow-Origin', req.headers.get('origin'))
     res.headers.set('Access-Control-Allow-Methods', '*')
     res.headers.set('Access-Control-Allow-Headers', '*')
 
-    var cache = req.headers.get('x-cache-control')
+    
     if (cache) {
       res.headers.set('Cache-Control', cache)
       if (res.headers.has('Expires')) {
