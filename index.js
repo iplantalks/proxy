@@ -58,6 +58,9 @@ export default {
       if (res.headers.has('Set-Cookie')) {
         res.headers.delete('Set-Cookie')
       }
+      if (res.headers.has('Pragma')) {
+        res.headers.delete('Pragma')
+      }
     }
 
     return res
