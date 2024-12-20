@@ -55,6 +55,9 @@ export default {
       if (res.headers.has('Expires')) {
         res.headers.delete('Expires')
       }
+      if (res.headers.has('Set-Cookie')) {
+        res.headers.delete('Set-Cookie')
+      }
     }
 
     return res
