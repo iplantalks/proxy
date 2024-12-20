@@ -52,6 +52,9 @@ export default {
     var cache = req.headers.get('x-cache-control')
     if (cache) {
       res.headers.set('Cache-Control', cache)
+      if (res.headers.has('Expires') {
+        res.headers.delete('Expires')
+      }
     }
 
     return res
